@@ -1,15 +1,34 @@
-import { useState } from 'react'
-import Header from './components/Header'
+import { useState } from 'react';
+import Header from './components/Header';
+import ListadoGastos from './components/ListadoGastos';
+import Modal from './components/Modal';
+import { generarId } from './helpers';
 import IconoNuevoGasto from './img/nuevo-gasto.svg'
 function App() {
   const [presupuesto, setPresupuesto] = useState(0);
   const [isValidPresupuesto, setIsValidPresupuesto] = useState(false)
 
   const [modal, setModal] = useState(false)
+  const [animarModal, setAnimarModal] = useState(false)
+
+  const [gastos, setGastos] = useState([])
+
   const handleNuevoGasto = () =>{
     setModal(true)
-  }
 
+    setTimeout(()=>{
+      setAnimarModal(true)
+    },500)
+  }
+  const guardarGasto = gasto =>{
+    gasto.id = generarId();
+    setGastos([...gastos, gasto])
+
+    setAnimarModal(false)
+    setTimeout(() => {
+      setModal(false)
+    }, 500);
+  }
 
   return (
     <div>
@@ -22,16 +41,28 @@ function App() {
 
       {//el doble aspersan es una condicional, la diferencia de usar "?" es que este no es obligacion de poner un else es decir ":", si en dado caso no deseas retornar otro valor
           }
-      { isValidPresupuesto && (      
-        <div className='nuevo-gasto'>
-            <img
-              src={IconoNuevoGasto}
-              alt='Icono nuevo gasto'
-              onClick={handleNuevoGasto}
+      { isValidPresupuesto && (     
+        <>
+          <main>
+            <ListadoGastos
+              gastos = {gastos}
             />
-        </div>
+          </main>
+          <div className='nuevo-gasto'>
+              <img
+                src={IconoNuevoGasto}
+                alt='Icono nuevo gasto'
+                onClick={handleNuevoGasto}
+              />
+          </div>
+        </>
       )}
-      {modal && <p>desde modal</p>}
+      {modal && <Modal
+                  setModal = {setModal}
+                  animarModal = {animarModal}
+                  setAnimarModal = {setAnimarModal}
+                  guardarGasto = {guardarGasto}
+                />}
 
     </div>
   )
