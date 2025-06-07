@@ -145,8 +145,7 @@ header h1 {
     border-left: 5px solid #b91c1c;
     color: #b91c1c;
 }
-.alerta.success {
-}
+
 
 .contenedor {
     width: 90%;
@@ -403,4 +402,84 @@ body .modal {
     align-items: center;
     font-size: 2.4rem;
     text-align: right;
+}
+
+/* Estilos para el Login */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--azul);
+    padding: 2rem;
+}
+
+.login-box {
+    width: 95%;
+    max-width: 50rem;
+    background-color: var(--blanco);
+    border-radius: 1.2rem;
+    padding: 5rem 3rem;
+}
+
+.login-box h2 {
+    text-align: center;
+    color: var(--azul);
+    margin: 0 0 4rem 0;
+    text-transform: uppercase;
+    font-size: 3.6rem;
+}
+
+.login-box .campo {
+    margin-bottom: 3rem;
+}
+
+.login-box label {
+    color: var(--azul);
+    font-size: 2.2rem;
+    display: block;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.login-box input[type="email"],
+.login-box input[type="password"] {
+    width: 70%;
+    padding: 1.5rem;
+    border: 2px solid var(--gris-claro);
+    border-radius: 1rem;
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+}
+
+.login-box input[type="email"]:focus,
+.login-box input[type="password"]:focus {
+    outline: none;
+    border-color: var(--azul);
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+}
+
+.login-box input[type="submit"] {
+    background-color: var(--azul);
+    padding: 1.5rem;
+    color: var(--blanco);
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 1rem;
+    width: 70%;
+    margin-top: 2rem;
+    font-size: 1.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.login-box input[type="submit"]:hover {
+    background-color: #1a56db;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .login-box {
+        padding: 5rem;
+    }
 }
