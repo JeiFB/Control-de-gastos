@@ -146,6 +146,11 @@ header h1 {
     color: #b91c1c;
 }
 
+.alerta.success {
+    background-color: var(--blanco);
+    border-left: 5px solid #15803d;
+    color: #15803d;
+}
 
 .contenedor {
     width: 90%;
@@ -482,4 +487,48 @@ body .modal {
     .login-box {
         padding: 5rem;
     }
+}
+
+/* Estilos adicionales para el registro */
+.texto-cuenta {
+    margin-top: 2.5rem;
+    text-align: center;
+    color: var(--gris-oscuro);
+}
+
+.link-cuenta {
+    background: none;
+    border: none;
+    color: var(--azul);
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0;
+    font-size: inherit;
+}
+
+.link-cuenta:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para el botón de cerrar sesión */
+.header-presupuesto {
+    display: flex;
+    justify-content: flex-end;
+    padding: 2rem;
+}
+
+.cerrar-sesion {
+    background-color: #DC2626;
+    border: none;
+    padding: 1rem 2rem;
+    color: var(--blanco);
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cerrar-sesion:hover {
+    background-color: #991B1B;
 }

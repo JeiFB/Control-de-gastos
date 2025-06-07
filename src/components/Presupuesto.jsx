@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import Filtros from "./Filtros";
 import Header from "./Header";
 import ListadoGastos from "./ListadoGastos";
@@ -6,8 +8,8 @@ import Modal from "./Modal";
 import { generarId } from "../helpers";
 import IconoNuevoGasto from "../img/nuevo-gasto.svg";
 
-const Presupuesto = ({}) => {
-  //                                                                       json.parse: sirve para convertia a un arregloee
+const Presupuesto = ({ setToken }) => {
+  const navigate = useNavigate();
   const [gastos, setGastos] = useState(
     localStorage.getItem("gastos")
       ? JSON.parse(localStorage.getItem("gastos"))
@@ -27,8 +29,11 @@ const Presupuesto = ({}) => {
   const [filtro, setFiltro] = useState("");
   const [gastosFiltrados, setGastosFiltrados] = useState([]);
 
+  const handleLogout = () => {
+    setToken(null);
+  };
+
   useEffect(() => {
-    //obejct.keys lo que haces es revisar las propiedades del objeto y verificar si tiene algo
     if (Object.keys(gastoEditar).length > 0) {
       setModal(true);
 
@@ -74,14 +79,12 @@ const Presupuesto = ({}) => {
 
   const guardarGasto = (gasto) => {
     if (gasto.id) {
-      //actualizar
       const gastosActualizados = gastos.map((gastoState) =>
         gastoState.id === gasto.id ? gasto : gastoState
       );
       setGastos(gastosActualizados);
       setGastoEditar({});
     } else {
-      //nuevo gasto
       gasto.id = generarId();
       gasto.fecha = Date.now();
       setGastos([...gastos, gasto]);
@@ -97,8 +100,18 @@ const Presupuesto = ({}) => {
     const gastosActualizados = gastos.filter((gasto) => gasto.id !== id);
     setGastos(gastosActualizados);
   };
+
   return (
-    <div className={modal ? "fijar" : " "}>
+    <div className={modal ? "fijar" : ""}>
+      <div className="header-presupuesto">
+        <button
+          className="cerrar-sesion"
+          onClick={handleLogout}
+        >
+          Cerrar Sesión
+        </button>
+      </div>
+
       <Header
         gastos={gastos}
         setGastos={setGastos}
@@ -108,9 +121,6 @@ const Presupuesto = ({}) => {
         setIsValidPresupuesto={setIsValidPresupuesto}
       />
 
-      {
-        //el doble aspersan es una condicional, la diferencia de usar "?" es que este no es obligacion de poner un else es decir ":", si en dado caso no deseas retornar otro valor
-      }
       {isValidPresupuesto && (
         <>
           <main>
@@ -145,4 +155,9 @@ const Presupuesto = ({}) => {
     </div>
   );
 };
+
+Presupuesto.propTypes = {
+  setToken: PropTypes.func.isRequired
+};
+
 export default Presupuesto;
